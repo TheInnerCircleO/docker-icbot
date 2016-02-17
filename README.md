@@ -1,42 +1,63 @@
 icbot
 =====
 
-Chat bot for The Inner Circle Google Hangouts chat.
+Docker image for The Inner Circle's Google Hangouts chat bot -- built on
+[HangoutsBot](https://github.com/hangoutsbot/hangoutsbot).
 
-[![Build Status](https://travis-ci.org/TheInnerCircleO/icbot.svg?branch=master)](https://travis-ci.org/TheInnerCircleO/icbot)
+[![Build Status](https://travis-ci.org/TheInnerCircleO/docker-icbot.svg?branch=master)](https://travis-ci.org/TheInnerCircleO/docker-icbot)
 [![](https://badge.imagelayers.io/theinnercircle/icbot:latest.svg)](https://imagelayers.io/?images=theinnercircle/icbot:latest 'Get your own badge on imagelayers.io')
 
 
 ### Running the Container
 
+**Create a named data volume**
+
+In order to persist configuration data through container upgrades we need to
+create a named data volume (not required but _highly_ recommended):
+
+    docker volume create --name hangoutsbot-data
+
 **First run & authentication**
 
-The first time you run the bot you have to authenticate it manually.  To do
-this run the bot interactively and follow the instructions given:
+The first time you run the bot you have to authenticate it manually. To do
+this run the bot interactively and follow the instructions provided:
 
-    docker run -it --rm -v hangoutsbot-data:/etc/hangoutsbot phlak/hangoutsbot
+    docker run -it --rm -v hangoutsbot-data:/etc/hangoutsbot theinnercircle/icbot
 
 **Running the bot**
 
 Once authenticated you can use `Ctrl + C` to kill the running container and run
-a daemonized instance of the bot image:
+a daemonized bot container:
 
     docker run -dt -v hangoutsbot-data:/etc/hangoutsbot --name icbot theinnercircle/icbot
-
-
-### Plugin Development
-
-To test a single plugin during development you can mount your plugin/folder via
-a docker volume (using the `-v` switch) to a temporary container running in the
-foreground:
-
-    docker run -it --rm -v hangoutsbot-data:/etc/hangoutsbot -v /path/to/plugins/plugin_name.py:/opt/hangoutsbot/hangupsbot/plugins/plugin_name.py theinnercircle/icbot
 
 
 ##### Optional 'docker run' Arguments
 
 `--restart always` - Always restart the container regardless of the exit status. See the Docker
                      [restart policies](https://goo.gl/OI87rA) for additional details.
+
+
+##### Modifying bot config
+
+The bot configuration can be modified by editing the `config.json` file in the
+running container:
+
+    docker exec -it icbot vi /etc/hangoutsbot/config.json
+
+After saving your changes and exiting the editor, restart the running container
+to apply the changes:
+
+    docker retstart icbot
+
+
+### Plugin Development
+
+To test a single plugin during development you can mount your plugin file or
+folder via a docker volume (the `-v` switch) to a temporary container running
+in the foreground:
+
+    docker run -it --rm -v hangoutsbot-data:/etc/hangoutsbot -v /path/to/plugins/plugin_name.py:/opt/hangoutsbot/hangupsbot/plugins/plugin_name.py theinnercircle/icbot
 
 
 -----
