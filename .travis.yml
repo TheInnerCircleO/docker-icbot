@@ -1,0 +1,16 @@
+language: python
+python:
+    - "3.4"
+    - "3.5"
+
+# Docker testing
+sudo: required
+services:
+    - docker
+
+# Install dependencies
+install:
+    - "pip3 install --upgrade tox pep8"
+
+# Run tests
+script: tox && ./build.sh
