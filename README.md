@@ -8,23 +8,30 @@ Docker image for The Inner Circle's Google Hangouts chat bot -- built on
 [![](https://badge.imagelayers.io/theinnercircle/icbot:latest.svg)](https://imagelayers.io/?images=theinnercircle/icbot:latest 'Get your own badge on imagelayers.io')
 
 
-### Running the Container
+Prerequisites
+-------------
 
-**Create a named data volume**
+  - [Docker Engine](https://www.docker.com) >= v1.9
+
+
+Running the Container
+---------------------
+
+#### Create a named data volume
 
 In order to persist configuration data through container upgrades we need to
 create a named data volume (not required but _highly_ recommended):
 
     docker volume create --name hangoutsbot-data
 
-**First run & authentication**
+#### First run & authentication
 
 The first time you run the bot you have to authenticate it manually. To do
 this run the bot interactively and follow the instructions provided:
 
     docker run -it --rm -v hangoutsbot-data:/etc/hangoutsbot theinnercircle/icbot
 
-**Running the bot**
+#### Running the bot
 
 Once authenticated you can use `Ctrl + C` to kill the running container and run
 a daemonized bot container:
@@ -32,13 +39,14 @@ a daemonized bot container:
     docker run -dt -v hangoutsbot-data:/etc/hangoutsbot --name icbot theinnercircle/icbot
 
 
-##### Optional 'docker run' Arguments
+###### Optional 'docker run' Arguments
 
 `--restart always` - Always restart the container regardless of the exit status. See the Docker
                      [restart policies](https://goo.gl/OI87rA) for additional details.
 
 
-##### Modifying bot config
+Modifying the Config
+--------------------
 
 The bot configuration can be modified by editing the `config.json` file in the
 running container:
@@ -51,7 +59,8 @@ to apply the changes:
     docker retstart icbot
 
 
-### Plugin Development
+Plugin Development
+------------------
 
 To test a single plugin during development you can mount your plugin file or
 folder via a docker volume (the `-v` switch) to a temporary container running
