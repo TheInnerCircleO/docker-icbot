@@ -1,5 +1,5 @@
-icbot
-=====
+docker-icbot
+============
 
 Docker image for The Inner Circle's Google Hangouts chat bot -- built on
 [HangoutsBot](https://github.com/hangoutsbot/hangoutsbot).
