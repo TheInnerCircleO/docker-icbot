@@ -22,21 +22,21 @@ Running the Container
 In order to persist configuration data through container upgrades we need to
 create a named data volume (not required but _highly_ recommended):
 
-    docker volume create --name hangoutsbot-data
+    docker volume create --name icbot-data
 
 #### First run & authentication
 
 The first time you run the bot you have to authenticate it manually. To do
 this run the bot interactively and follow the instructions provided:
 
-    docker run -it --rm -v hangoutsbot-data:/etc/hangoutsbot theinnercircle/icbot
+    docker run -it --rm -v icbot-data:/etc/hangoutsbot theinnercircle/icbot
 
 #### Running the bot
 
 Once authenticated you can use `Ctrl + C` to kill the running container and run
 a daemonized bot container:
 
-    docker run -dt -v hangoutsbot-data:/etc/hangoutsbot --name icbot theinnercircle/icbot
+    docker run -dt -v icbot-data:/etc/hangoutsbot --name icbot theinnercircle/icbot
 
 
 ###### Optional 'docker run' Arguments
@@ -66,7 +66,7 @@ To test a single plugin during development you can mount your plugin file or
 folder via a docker volume (the `-v` switch) to a temporary container running
 in the foreground:
 
-    docker run -it --rm -v hangoutsbot-data:/etc/hangoutsbot -v /path/to/plugins/plugin_name.py:/opt/hangoutsbot/hangupsbot/plugins/plugin_name.py theinnercircle/icbot
+    docker run -it --rm -v icbot-data:/etc/hangoutsbot -v /path/to/plugins/plugin_name.py:/opt/hangoutsbot/hangupsbot/plugins/plugin_name.py theinnercircle/icbot
 
 
 -----
