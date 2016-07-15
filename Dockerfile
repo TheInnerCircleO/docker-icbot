@@ -2,7 +2,7 @@ FROM alpine:3.4
 MAINTAINER The Inner Circle <https://github.com/TheInnerCircleO>
 
 # Hangoutsbot version
-ENV HOB_VERSION 2.7.8
+ENV HOB_VERSION 2.7.9
 
 # Create Hangoutsbot directories
 RUN mkdir -p /opt/hangoutsbot /etc/hangoutsbot
@@ -15,6 +15,7 @@ RUN apk add --update ca-certificates gcc git python3-dev tar wget \
     && wget -qO- ${TARBALL_URL} | tar -xz --strip-components=1 -C /opt/hangoutsbot \
     && wget -qO- https://bootstrap.pypa.io/get-pip.py | python3 \
     && pip3 install --no-cache-dir -r /opt/hangoutsbot/requirements.txt \
+    && pip3 install --no-cache-dir soundcloud TwitterAPI \
     && apk del --purge gcc git tar wget && rm -rf /var/cache/apk/*
 
 # Add our custom plugins
