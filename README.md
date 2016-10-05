@@ -5,8 +5,7 @@ Docker image for The Inner Circle's Google Hangouts chat bot -- built on
 [HangoutsBot](https://github.com/hangoutsbot/hangoutsbot).
 
 [![Build Status](https://travis-ci.org/TheInnerCircleO/docker-icbot.svg?branch=master)](https://travis-ci.org/TheInnerCircleO/docker-icbot)
-[![](https://badge.imagelayers.io/theinnercircle/icbot:latest.svg)](https://imagelayers.io/?images=theinnercircle/icbot:latest 'Get your own badge on imagelayers.io')
-
+[![](https://images.microbadger.com/badges/image/theinnercircle/icbot.svg)](http://microbadger.com/#/images/theinnercircle/icbot "Get your own image badge on microbadger.com")
 
 Prerequisites
 -------------
