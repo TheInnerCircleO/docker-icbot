@@ -2,7 +2,7 @@ FROM alpine:3.4
 MAINTAINER The Inner Circle <https://github.com/TheInnerCircleO>
 
 # Hangoutsbot version
-ENV HOB_VERSION 2.7.9
+ENV HOB_VERSION 2.7.10
 
 # Create Hangoutsbot directories
 RUN mkdir -p /opt/hangoutsbot /etc/hangoutsbot
