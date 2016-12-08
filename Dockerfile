@@ -7,9 +7,6 @@ ENV HOB_VERSION 2.7.10
 # Create Hangoutsbot directories
 RUN mkdir -p /opt/hangoutsbot /etc/hangoutsbot
 
-# Create non-root user
-RUN adduser -Ds /sbin/nologin hangoutsbot
-
 # Set Hangoutsbot archive URL
 ENV TARBALL_URL https://api.github.com/repos/hangoutsbot/hangoutsbot/tarball/${HOB_VERSION}
 
@@ -19,11 +16,7 @@ RUN apk add --update ca-certificates gcc git python3-dev tar tzdata wget \
     && wget -qO- https://bootstrap.pypa.io/get-pip.py | python3 \
     && pip3 install --no-cache-dir -r /opt/hangoutsbot/requirements.txt \
     && pip3 install --no-cache-dir soundcloud TwitterAPI \
-    && apk del --purge gcc git tar wget && rm -rf /var/cache/apk/* \
-    && chown -R hangoutsbot:hangoutsbot /etc/hangoutsbot /opt/hangoutsbot
-
-# Set running user
-USER hangoutsbot
+    && apk del --purge gcc git tar wget && rm -rf /var/cache/apk/*
 
 # Add our custom plugins
 COPY plugins/* /opt/hangoutsbot/hangupsbot/plugins/
