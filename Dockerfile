@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.5
 MAINTAINER The Inner Circle <https://github.com/TheInnerCircleO>
 
 # Hangoutsbot version
