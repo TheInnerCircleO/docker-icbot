@@ -26,7 +26,7 @@ def btc(bot, event, *args):
     /bot btc
     displays current btc on BTC-e
     """
-    btce_json = get_json('http://btc-e.com/api/3/ticker/btc_usd')
-    result = 'BTC/USD: ' + str(btce_json['btc_usd']['avg'])
+    btc_json = get_json('https://api.coinbase.com/v2/prices/spot?currency=USD')
+    result = 'BTC/USD: ' + str(btc_json['data']['amount'])
 
     bot.send_message_parsed(event.conv, result)
