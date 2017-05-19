@@ -7,7 +7,7 @@ set -o errexit
 SCRIPT_DIR="$(dirname $(readlink -f ${0}))"
 
 IMAGE_NAME="theinnercircle/icbot"
-TAG="$(grep 'ARG HOB_VERSION' Dockerfile | awk -F = '{print $2}')"
+TAG="$(grep 'FROM phlak/hangoutsbot' Dockerfile | awk -F : '{print $2}')"
 
 ## SCRIPT USAGE
 ########################################
